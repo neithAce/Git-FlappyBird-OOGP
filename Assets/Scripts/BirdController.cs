@@ -17,7 +17,9 @@ public class BirdController : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
+        if (!GameManager.Instance.IsGameStarted()) return;
+
+        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
         {
             Flap();
         }
@@ -41,6 +43,8 @@ public class BirdController : MonoBehaviour
        if(!_isAlive) return;
        _isAlive = false;
         Debug.Log("Bird died!");
+
+        GameManager.Instance.GameOver();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
